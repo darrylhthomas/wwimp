@@ -106,15 +106,6 @@
                                                };
                     error = [NSError errorWithDomain:@"WWIMPImageDataSourceErrorDomain" code:100 userInfo:userInfo];
                 }
-            } else {
-                NSFileManager *manager = [NSFileManager defaultManager];
-                NSURL *testURL = location;
-                while ([[testURL path] length] > 1) {
-                    BOOL isDirectory = NO;
-                    BOOL exists = [manager fileExistsAtPath:[testURL path] isDirectory:&isDirectory];
-                    NSLog(@"URL %@: Exists? %@, Is Directory? %@", testURL, @(exists), @(isDirectory));
-                    testURL = [testURL URLByDeletingLastPathComponent];
-                }
             }
         }
         dispatch_async(self.cacheQueue, ^{
