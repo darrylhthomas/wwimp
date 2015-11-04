@@ -1,0 +1,345 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		440516761BE8169E0041A29D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 440516751BE8169E0041A29D /* main.m */; };
+		440516791BE8169E0041A29D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 440516781BE8169E0041A29D /* AppDelegate.m */; };
+		440516821BE8169F0041A29D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440516801BE8169F0041A29D /* Main.storyboard */; };
+		440516841BE8169F0041A29D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440516831BE8169F0041A29D /* Assets.xcassets */; };
+		4405168D1BE8172A0041A29D /* WWIMPSessionFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405168C1BE8172A0041A29D /* WWIMPSessionFinder.m */; };
+		440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405168F1BE842CF0041A29D /* WWIMPSessionTabBarController.m */; };
+		440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */; };
+		4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */; };
+		449A4C2A1BE8A9EC00C761C8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A4C291BE8A9EC00C761C8 /* AVKit.framework */; };
+		449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */; };
+		449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		440516711BE8169E0041A29D /* wwimp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wwimp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		440516751BE8169E0041A29D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		440516771BE8169E0041A29D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		440516781BE8169E0041A29D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		440516811BE8169F0041A29D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		440516831BE8169F0041A29D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		440516851BE8169F0041A29D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4405168B1BE8172A0041A29D /* WWIMPSessionFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionFinder.h; sourceTree = "<group>"; };
+		4405168C1BE8172A0041A29D /* WWIMPSessionFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionFinder.m; sourceTree = "<group>"; };
+		4405168E1BE842CF0041A29D /* WWIMPSessionTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionTabBarController.h; sourceTree = "<group>"; };
+		4405168F1BE842CF0041A29D /* WWIMPSessionTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionTabBarController.m; sourceTree = "<group>"; };
+		440516971BE862820041A29D /* WWIMPSessionListingNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionListingNavigationController.h; sourceTree = "<group>"; };
+		440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingNavigationController.m; sourceTree = "<group>"; };
+		4405169A1BE863D90041A29D /* WWIMPSessionListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionListingViewController.h; sourceTree = "<group>"; };
+		4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingViewController.m; sourceTree = "<group>"; };
+		449A4C291BE8A9EC00C761C8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		449A4C2B1BE943AB00C761C8 /* WWIMPImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPImageDataSource.h; sourceTree = "<group>"; };
+		449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPImageDataSource.m; sourceTree = "<group>"; };
+		449A4C2F1BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+MutableArrayNodes.h"; sourceTree = "<group>"; };
+		449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+MutableArrayNodes.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4405166E1BE8169E0041A29D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				449A4C2A1BE8A9EC00C761C8 /* AVKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		440516681BE8169E0041A29D = {
+			isa = PBXGroup;
+			children = (
+				449A4C291BE8A9EC00C761C8 /* AVKit.framework */,
+				440516731BE8169E0041A29D /* wwimp */,
+				440516721BE8169E0041A29D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		440516721BE8169E0041A29D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				440516711BE8169E0041A29D /* wwimp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		440516731BE8169E0041A29D /* wwimp */ = {
+			isa = PBXGroup;
+			children = (
+				449A4C2E1BE963BA00C761C8 /* Categories */,
+				440516771BE8169E0041A29D /* AppDelegate.h */,
+				440516781BE8169E0041A29D /* AppDelegate.m */,
+				4405168B1BE8172A0041A29D /* WWIMPSessionFinder.h */,
+				4405168C1BE8172A0041A29D /* WWIMPSessionFinder.m */,
+				449A4C2B1BE943AB00C761C8 /* WWIMPImageDataSource.h */,
+				449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */,
+				4405168E1BE842CF0041A29D /* WWIMPSessionTabBarController.h */,
+				4405168F1BE842CF0041A29D /* WWIMPSessionTabBarController.m */,
+				440516971BE862820041A29D /* WWIMPSessionListingNavigationController.h */,
+				440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */,
+				4405169A1BE863D90041A29D /* WWIMPSessionListingViewController.h */,
+				4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */,
+				440516801BE8169F0041A29D /* Main.storyboard */,
+				440516831BE8169F0041A29D /* Assets.xcassets */,
+				440516851BE8169F0041A29D /* Info.plist */,
+				440516741BE8169E0041A29D /* Supporting Files */,
+			);
+			path = wwimp;
+			sourceTree = "<group>";
+		};
+		440516741BE8169E0041A29D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				440516751BE8169E0041A29D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		449A4C2E1BE963BA00C761C8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				449A4C2F1BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.h */,
+				449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		440516701BE8169E0041A29D /* wwimp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 440516881BE8169F0041A29D /* Build configuration list for PBXNativeTarget "wwimp" */;
+			buildPhases = (
+				4405166D1BE8169E0041A29D /* Sources */,
+				4405166E1BE8169E0041A29D /* Frameworks */,
+				4405166F1BE8169E0041A29D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wwimp;
+			productName = wwimp;
+			productReference = 440516711BE8169E0041A29D /* wwimp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		440516691BE8169E0041A29D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Darryl H. Thomas";
+				TargetAttributes = {
+					440516701BE8169E0041A29D = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = ML38586DNP;
+					};
+				};
+			};
+			buildConfigurationList = 4405166C1BE8169E0041A29D /* Build configuration list for PBXProject "wwimp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 440516681BE8169E0041A29D;
+			productRefGroup = 440516721BE8169E0041A29D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				440516701BE8169E0041A29D /* wwimp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4405166F1BE8169E0041A29D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				440516841BE8169F0041A29D /* Assets.xcassets in Resources */,
+				440516821BE8169F0041A29D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4405166D1BE8169E0041A29D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */,
+				440516791BE8169E0041A29D /* AppDelegate.m in Sources */,
+				440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */,
+				4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */,
+				4405168D1BE8172A0041A29D /* WWIMPSessionFinder.m in Sources */,
+				440516761BE8169E0041A29D /* main.m in Sources */,
+				440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */,
+				449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		440516801BE8169F0041A29D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				440516811BE8169F0041A29D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		440516861BE8169F0041A29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		440516871BE8169F0041A29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		440516891BE8169F0041A29D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				INFOPLIST_FILE = wwimp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.darrylththomas.wwimp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		4405168A1BE8169F0041A29D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				INFOPLIST_FILE = wwimp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.darrylththomas.wwimp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4405166C1BE8169E0041A29D /* Build configuration list for PBXProject "wwimp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				440516861BE8169F0041A29D /* Debug */,
+				440516871BE8169F0041A29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		440516881BE8169F0041A29D /* Build configuration list for PBXNativeTarget "wwimp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				440516891BE8169F0041A29D /* Debug */,
+				4405168A1BE8169F0041A29D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 440516691BE8169E0041A29D /* Project object */;
+}
