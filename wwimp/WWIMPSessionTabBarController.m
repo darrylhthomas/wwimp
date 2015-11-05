@@ -9,6 +9,7 @@
 #import "WWIMPSessionTabBarController.h"
 #import "WWIMPSessionFinder.h"
 #import "WWIMPSessionListingNavigationController.h"
+#import "WWIMPMoreTableViewController.h"
 #import "WWIMPImageDataSource.h"
 
 #define SESSION_REQUEST_URL_STRING @""
@@ -82,6 +83,17 @@
                 navController.listingViewController.sessions = strongSelf.sessionFinder.sessionsByTrack[track];
                 [viewControllers addObject:navController];
             }
+            
+            if ([viewControllers count] > 7) {
+                NSRange moreRange = NSMakeRange(6, [viewControllers count] - 6);
+                NSArray *moreViewControllers = [viewControllers subarrayWithRange:moreRange];
+                WWIMPMoreTableViewController *moreViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreTableViewController"];
+                moreViewController.viewControllers = moreViewControllers;
+                UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
+                [viewControllers removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:moreRange]];
+                [viewControllers addObject:moreNavigationController];
+            }
+            
             strongSelf.viewControllers = viewControllers;
         } else {
             strongSelf.viewControllers = nil;

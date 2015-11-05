@@ -134,6 +134,43 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="1241"/>
         </scene>
+        <!--More…-->
+        <scene sceneID="EWx-bO-zTE">
+            <objects>
+                <tableViewController storyboardIdentifier="MoreTableViewController" title="More…" id="bCE-wd-Ucd" customClass="WWIMPMoreTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="9dH-gY-NQk">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ViewControllerCell" textLabel="t0r-QG-hWH" style="IBUITableViewCellStyleDefault" id="K0l-qF-fZT">
+                                <rect key="frame" x="0.0" y="194" width="1920" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0l-qF-fZT" id="q7X-52-1PN">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t0r-QG-hWH">
+                                            <rect key="frame" x="20" y="0.0" width="1864" height="66"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bCE-wd-Ucd" id="6Wf-4w-IE1"/>
+                            <outlet property="delegate" destination="bCE-wd-Ucd" id="uX3-xh-v5S"/>
+                        </connections>
+                    </tableView>
+                    <simulatedTabBarMetrics key="simulatedTopBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2bK-f9-GOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2177" y="-1193"/>
+        </scene>
         <!--Session Listing Navigation Controller-->
         <scene sceneID="Nnb-XM-wQh">
             <objects>
