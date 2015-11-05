@@ -36,7 +36,7 @@
 
 - (WWIMPSessionListingViewController *)listingViewController
 {
-    return (WWIMPSessionListingViewController *)(self.topViewController);
+    return (WWIMPSessionListingViewController *)[self.viewControllers firstObject];
 }
 
 @end
