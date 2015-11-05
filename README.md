@@ -65,7 +65,6 @@ Again, wwimp is extremely basic, and I intend to keep it that way. That said, th
 
 - Model persistence (right now, every time the app launches, a request for the JSON is fired off)
 - Filtering by year
-- A "more" tab. tvOS only supports 7 tabs, so if there are more than 7 tracks, you won't see them all.
 - Watched-state indicators to help you keep track of what you've already watched
 - Favorites or a watch queue, possibly both
 - Search
