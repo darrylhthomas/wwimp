@@ -18,6 +18,8 @@
 		449A4C2A1BE8A9EC00C761C8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A4C291BE8A9EC00C761C8 /* AVKit.framework */; };
 		449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */; };
 		449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */; };
+		44D822EF1BEC801100B6C34F /* wwimp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */; };
+		44D822F21BEC86F800B6C34F /* WWIMPModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D822F11BEC86F800B6C34F /* WWIMPModelController.m */; };
 		44ED15331BEB36CC0041BBA4 /* WWIMPMoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ED15321BEB36CC0041BBA4 /* WWIMPMoreTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,9 @@
 		449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPImageDataSource.m; sourceTree = "<group>"; };
 		449A4C2F1BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+MutableArrayNodes.h"; sourceTree = "<group>"; };
 		449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+MutableArrayNodes.m"; sourceTree = "<group>"; };
+		44D822EE1BEC801100B6C34F /* wwimp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wwimp.xcdatamodel; sourceTree = "<group>"; };
+		44D822F01BEC86F800B6C34F /* WWIMPModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPModelController.h; sourceTree = "<group>"; };
+		44D822F11BEC86F800B6C34F /* WWIMPModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPModelController.m; sourceTree = "<group>"; };
 		44ED15311BEB36CC0041BBA4 /* WWIMPMoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPMoreTableViewController.h; sourceTree = "<group>"; };
 		44ED15321BEB36CC0041BBA4 /* WWIMPMoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPMoreTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +86,9 @@
 				449A4C2E1BE963BA00C761C8 /* Categories */,
 				440516771BE8169E0041A29D /* AppDelegate.h */,
 				440516781BE8169E0041A29D /* AppDelegate.m */,
+				44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */,
+				44D822F01BEC86F800B6C34F /* WWIMPModelController.h */,
+				44D822F11BEC86F800B6C34F /* WWIMPModelController.m */,
 				4405168B1BE8172A0041A29D /* WWIMPSessionFinder.h */,
 				4405168C1BE8172A0041A29D /* WWIMPSessionFinder.m */,
 				449A4C2B1BE943AB00C761C8 /* WWIMPImageDataSource.h */,
@@ -192,7 +200,9 @@
 				440516791BE8169E0041A29D /* AppDelegate.m in Sources */,
 				440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */,
 				44ED15331BEB36CC0041BBA4 /* WWIMPMoreTableViewController.m in Sources */,
+				44D822EF1BEC801100B6C34F /* wwimp.xcdatamodeld in Sources */,
 				4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */,
+				44D822F21BEC86F800B6C34F /* WWIMPModelController.m in Sources */,
 				4405168D1BE8172A0041A29D /* WWIMPSessionFinder.m in Sources */,
 				440516761BE8169E0041A29D /* main.m in Sources */,
 				440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */,
@@ -346,6 +356,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				44D822EE1BEC801100B6C34F /* wwimp.xcdatamodel */,
+			);
+			currentVersion = 44D822EE1BEC801100B6C34F /* wwimp.xcdatamodel */;
+			path = wwimp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 440516691BE8169E0041A29D /* Project object */;
 }
