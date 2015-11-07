@@ -15,6 +15,7 @@
 		440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405168F1BE842CF0041A29D /* WWIMPSessionTabBarController.m */; };
 		440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */; };
 		4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */; };
+		442CC10F1BEDD3F30040B63B /* models in Resources */ = {isa = PBXBuildFile; fileRef = 442CC10E1BEDD3F30040B63B /* models */; };
 		449A4C2A1BE8A9EC00C761C8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A4C291BE8A9EC00C761C8 /* AVKit.framework */; };
 		449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */; };
 		449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */; };
@@ -39,6 +40,7 @@
 		440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingNavigationController.m; sourceTree = "<group>"; };
 		4405169A1BE863D90041A29D /* WWIMPSessionListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionListingViewController.h; sourceTree = "<group>"; };
 		4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingViewController.m; sourceTree = "<group>"; };
+		442CC10E1BEDD3F30040B63B /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		449A4C291BE8A9EC00C761C8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		449A4C2B1BE943AB00C761C8 /* WWIMPImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPImageDataSource.h; sourceTree = "<group>"; };
 		449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPImageDataSource.m; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				449A4C2E1BE963BA00C761C8 /* Categories */,
+				442CC10E1BEDD3F30040B63B /* models */,
 				440516771BE8169E0041A29D /* AppDelegate.h */,
 				440516781BE8169E0041A29D /* AppDelegate.m */,
 				44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */,
@@ -186,6 +189,7 @@
 			files = (
 				440516841BE8169F0041A29D /* Assets.xcassets in Resources */,
 				440516821BE8169F0041A29D /* Main.storyboard in Resources */,
+				442CC10F1BEDD3F30040B63B /* models in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
