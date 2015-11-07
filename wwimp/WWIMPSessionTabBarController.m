@@ -58,12 +58,16 @@
 
 - (void)reloadTabs
 {
-    if ([SESSION_REQUEST_URL_STRING length] == 0) {
+    NSString *sessionsURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"WWIMPSessionsURL"];
+    if (!sessionsURLString) {
+        sessionsURLString = SESSION_REQUEST_URL_STRING;
+    }
+    if ([sessionsURLString length] == 0) {
         self.needsURLAlert = YES;
         return;
     }
     
-    NSURL *sessionsURL = [NSURL URLWithString:SESSION_REQUEST_URL_STRING];
+    NSURL *sessionsURL = [NSURL URLWithString:sessionsURLString];
     __weak WWIMPSessionTabBarController *weakSelf = self;
     [self.sessionFinder findSessionsWithURL:sessionsURL completionQueue:nil completionHandler:^(BOOL success, NSError * _Nullable error) {
         __strong WWIMPSessionTabBarController *strongSelf = weakSelf;
