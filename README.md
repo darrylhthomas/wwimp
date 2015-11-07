@@ -57,7 +57,7 @@ So, if you want wwimp to wwork for you, you'll need to find the right one and mo
 
 On a completely unrelated note, I recently read a [GIST by Steven Troughton-Smith](https://gist.github.com/steventroughtonsmith/c24bb6b6a28c5b583008) that contained an interesting URL. I have no idea whether the URL would be of any use to you, but I'd like to thank Steven, regardless.
 
-Once you do have a URL to use, you'll want to replace the empty string defined as SESSION_REQUEST_URL_STRING in WWIMPSessionTabBarController.m with the URL you have chosen.
+Once you do have a URL to use, you'll want to replace the empty string defined as SESSION_REQUEST_URL_STRING in WWIMPSessionTabBarController.m with the URL you have chosen. Alternatively, you can create a new scheme for the wwimp target and pass the URL as a runtime argument (eg. `-WWIMPSessionsURL https://example.org/path/to/json.json`). This way, you can easily avoid committing the URL into the source during development. You'll still need to set SESSION_REQUEST_URL_STRING if you plan on launching wwimp without the scheme.
 
 ## Upcoming Features
 
