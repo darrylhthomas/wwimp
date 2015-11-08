@@ -1,5 +1,8 @@
 #import "_WWIMPSession.h"
 
 @interface WWIMPSession : _WWIMPSession {}
-// Custom logic goes here.
+
+@property (nonatomic, copy, readonly) NSString *key;
+@property (nonatomic, copy, readonly) NSString *lastPlayPositionUserDefaultsKey;
+
 @end

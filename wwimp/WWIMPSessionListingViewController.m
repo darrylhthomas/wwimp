@@ -14,6 +14,7 @@
 
 @interface WWIMPSessionListingViewController ()
 @property (nonatomic) NSIndexPath *focusedIndexPath;
+@property (nonatomic) BOOL wantsRestart;
 @end
 
 @implementation WWIMPSessionListingViewController
@@ -66,7 +67,7 @@
     self.titleLabel.hidden = NO;
     self.shelfImageView.hidden = NO;
 
-    NSString *imageKey = [NSString stringWithFormat:@"%@-%@", [session.year stringValue], [session.id stringValue]];
+    NSString *imageKey = session.key;
     NSURL *imageSourceURL = [NSURL URLWithString:session.shelfImageURLString];
     if (imageSourceURL == nil) {
         self.shelfImageView.image = [UIImage imageNamed:@"MissingShelfImage"];
@@ -77,7 +78,7 @@
             __strong WWIMPSessionListingViewController *strongSelf = weakSelf;
             if (strongSelf != nil && [strongSelf.focusedIndexPath isEqual:indexPath]) {
                 WWIMPSession *session = [strongSelf.fetchedResultsController objectAtIndexPath:indexPath];
-                NSString *currentImageKey = [NSString stringWithFormat:@"%@-%@", [session.year stringValue], [session.id stringValue]];
+                NSString *currentImageKey = session.key;
                 if ([currentImageKey isEqualToString:key]) {
                     strongSelf.shelfImageView.image = image;
                     [strongSelf.imageLoadingActivityIndicatorView stopAnimating];
@@ -89,16 +90,49 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:@"PlaySession"]) {
+        UITableViewCell *selectedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
+        WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSUInteger lastPlayPosition = [[NSUserDefaults standardUserDefaults] integerForKey:session.lastPlayPositionUserDefaultsKey];
+        if (lastPlayPosition > 0) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Resume Playing", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.wantsRestart = NO;
+                [self performSegueWithIdentifier:identifier sender:sender];
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Start from Beginning", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.wantsRestart = YES;
+                [self performSegueWithIdentifier:identifier sender:sender];
+            }]];
+            [self.navigationController.tabBarController presentViewController:alertController animated:YES completion:nil];
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    UITableViewCell *selectedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
-    WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    AVPlayerViewController *viewController = [segue destinationViewController];
-    viewController.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:session.urlString]];
-    [viewController.player play];
+    if ([segue.identifier isEqualToString:@"PlaySession"]) {
+        UITableViewCell *selectedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
+        WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        AVPlayerViewController *viewController = [segue destinationViewController];
+        viewController.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:session.urlString]];
+        NSString *lastPlayPositionKey = session.lastPlayPositionUserDefaultsKey;
+        [viewController.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+            NSUInteger lastPlayPosition = floorl(CMTimeGetSeconds(time));
+            [[NSUserDefaults standardUserDefaults] setInteger:lastPlayPosition forKey:lastPlayPositionKey];
+        }];
+        
+        NSUInteger lastPlayPosition = [[NSUserDefaults standardUserDefaults] integerForKey:lastPlayPositionKey];
+        if (lastPlayPosition > 0 && !self.wantsRestart) {
+            [viewController.player seekToTime:CMTimeMake(lastPlayPosition, 1)];
+        }
+        [viewController.player play];
+    }
 }
 
 #pragma mark - UITableViewDataSource

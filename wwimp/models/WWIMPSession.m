@@ -8,6 +8,14 @@
 
 @implementation WWIMPSession
 
-// Custom logic goes here.
+- (NSString *)key
+{
+    return [NSString stringWithFormat:@"%@-%@", [self.year stringValue], [self.id stringValue]];
+}
+
+- (NSString *)lastPlayPositionUserDefaultsKey
+{
+    return [@"last_play_position:" stringByAppendingString:self.key];
+}
 
 @end
