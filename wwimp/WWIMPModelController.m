@@ -163,12 +163,4 @@
     }];
 }
 
-- (void)fetchSessionsGroupedByTrackWithCompletionHandler:(void (^)(NSDictionary *, NSError *))completionHandler
-{
-    [self.backgroundManagedObjectContext performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[WWIMPSession entityName]];
-        [self.backgroundManagedObjectContext executeFetchRequest:fetchRequest error:nil];
-    }];
-}
-
 @end
