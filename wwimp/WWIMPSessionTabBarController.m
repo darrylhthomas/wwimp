@@ -32,7 +32,7 @@
 
     // TODO: move all this elsewhere
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *storeURL = [[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject] URLByAppendingPathComponent:@"wwimp.db"];
+    NSURL *storeURL = [[[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject] URLByAppendingPathComponent:@"wwimp.db"];
 
     NSString *sessionsURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"WWIMPSessionsURL"];
     if (!sessionsURLString) {
