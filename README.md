@@ -63,7 +63,6 @@ Once you do have a URL to use, you'll want to replace the empty string defined a
 
 Again, wwimp is extremely basic, and I intend to keep it that way. That said, there are a few features I do intend to implement fairly soon, so be sure to watch this repo if you're interested in any of the following:
 
-- Model persistence (right now, every time the app launches, a request for the JSON is fired off)
 - Filtering by year
 - Watched-state indicators to help you keep track of what you've already watched
 - Favorites or a watch queue, possibly both
