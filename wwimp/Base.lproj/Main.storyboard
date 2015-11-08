@@ -168,7 +168,7 @@
                         <animations/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ViewControllerCell" textLabel="t0r-QG-hWH" style="IBUITableViewCellStyleDefault" id="K0l-qF-fZT">
-                                <rect key="frame" x="0.0" y="54" width="1880" height="66"/>
+                                <rect key="frame" x="0.0" y="194" width="1920" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0l-qF-fZT" id="q7X-52-1PN">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
