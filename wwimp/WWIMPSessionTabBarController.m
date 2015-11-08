@@ -34,13 +34,16 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *storeURL = [[[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject] URLByAppendingPathComponent:@"wwimp.db"];
 
-    NSString *sessionsURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"WWIMPSessionsURL"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *sessionsURLString = [defaults stringForKey:@"WWIMPSessionsURL"];
     if (!sessionsURLString) {
         sessionsURLString = SESSION_REQUEST_URL_STRING;
     }
     if ([sessionsURLString length] == 0) {
         self.needsURLAlert = YES;
         return;
+    } else {
+        [defaults setObject:sessionsURLString forKey:@"WWIMPSessionsURL"];
     }
     
     NSURL *sessionsURL = [NSURL URLWithString:sessionsURLString];
