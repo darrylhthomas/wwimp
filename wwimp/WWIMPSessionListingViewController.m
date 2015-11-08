@@ -12,6 +12,9 @@
 #import "WWIMPImageDataSource.h"
 #import "WWIMPSession.h"
 
+#define MINIMUM_RESUMABLE_PLAYHEAD_POSITION 15
+#define MINIMUM_RESUMABLE_SECONDS_REMAINING 60
+
 @interface WWIMPSessionListingViewController ()
 @property (nonatomic) NSIndexPath *focusedIndexPath;
 @property (nonatomic) BOOL wantsRestart;
@@ -122,9 +125,17 @@
         AVPlayerViewController *viewController = [segue destinationViewController];
         viewController.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:session.urlString]];
         NSString *lastPlayPositionKey = session.lastPlayPositionUserDefaultsKey;
+        __weak AVPlayerViewController *weakViewController = viewController;
         [viewController.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-            NSUInteger lastPlayPosition = floorl(CMTimeGetSeconds(time));
-            [[NSUserDefaults standardUserDefaults] setInteger:lastPlayPosition forKey:lastPlayPositionKey];
+            __strong AVPlayerViewController *strongViewController = weakViewController;
+            if (strongViewController) {
+                NSUInteger lastPlayPosition = floorl(CMTimeGetSeconds(time));
+                NSUInteger durationInSeconds = floorl(CMTimeGetSeconds(strongViewController.player.currentItem.duration));
+                if (lastPlayPosition < MINIMUM_RESUMABLE_PLAYHEAD_POSITION || (durationInSeconds - lastPlayPosition) < MINIMUM_RESUMABLE_SECONDS_REMAINING) {
+                    lastPlayPosition = 0;
+                }
+                [[NSUserDefaults standardUserDefaults] setInteger:lastPlayPosition forKey:lastPlayPositionKey];
+            }
         }];
         
         NSUInteger lastPlayPosition = [[NSUserDefaults standardUserDefaults] integerForKey:lastPlayPositionKey];
