@@ -30,13 +30,6 @@
         NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:NULL];
         NSArray *sessions = [responseDictionary valueForKeyPath:@"sessions"];
         
-        /*
-        // Only include sessions from 2015 for now
-        sessions = [sessions objectsAtIndexes:[sessions indexesOfObjectsPassingTest:^BOOL(NSDictionary*  _Nonnull session, NSUInteger idx, BOOL * _Nonnull stop) {
-            return [session[@"year"] isEqualToNumber:@2015];
-        }]];
-         */
-        
         // Sessions are ordered in reverse chronological order, followed by ascending session id
         sessions = [sessions sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(NSDictionary*  _Nonnull session1, NSDictionary*  _Nonnull session2) {
             NSInteger year1 = [session1[@"year"] integerValue];
@@ -53,20 +46,6 @@
         
         _tracks = [responseDictionary[@"tracks"] copy];
         _allSessions = [sessions copy];
-        NSMutableDictionary *sessionsByTrack = [[NSMutableDictionary alloc] init];
-        NSMutableDictionary *sessionsByFocus = [[NSMutableDictionary alloc] init];
-        for (NSDictionary *session in sessions) {
-            NSString *track = session[@"track"];
-            NSArray *foci = session[@"focus"];
-            [sessionsByTrack addObject:session toArrayWithKey:track];
-            for (NSString *focus in foci) {
-                [sessionsByFocus addObject:session toArrayWithKey:focus];
-            }
-        }
-        
-        // Leaving the leaves mutable for now, because YOLO. This will likely all be persisted with Core Data eventually
-        _sessionsByTrack = [sessionsByTrack copy];
-        _sessionsByFocus = [sessionsByFocus copy];
         
         if (completionHandler) {
             [queue addOperationWithBlock:^{

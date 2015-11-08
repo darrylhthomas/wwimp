@@ -7,8 +7,10 @@
 //
 
 @import AVKit;
+
 #import "WWIMPSessionListingViewController.h"
 #import "WWIMPImageDataSource.h"
+#import "WWIMPSession.h"
 
 @interface WWIMPSessionListingViewController ()
 @property (nonatomic) NSIndexPath *focusedIndexPath;
@@ -28,16 +30,21 @@
 }
 
 
-- (void)setSessions:(NSArray *)sessions
+- (void)setFetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
-    _sessions = [sessions copy];
+    _fetchedResultsController = fetchedResultsController;
     [self reloadTableViewIfNeeded];
 }
 
 - (void)reloadTableViewIfNeeded
 {
     if (self.isViewLoaded) {
-        [self.tableView reloadData];
+        NSError *error = nil;
+        if ([self.fetchedResultsController performFetch:&error]) {
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error performing fetch: %@", [error localizedDescription]);
+        }
     }
 }
 
@@ -45,19 +52,22 @@
 {
     [self.imageLoadingActivityIndicatorView stopAnimating];
     self.focusedIndexPath = indexPath;
-    NSDictionary *session = self.sessions[indexPath.row];
-    self.descriptionLabel.text = session[@"description"];
-    self.yearLabel.text = [session[@"year"] stringValue];
-    self.titleLabel.text = [NSString stringWithFormat:@"%@ – %@", session[@"id"], session[@"title"]];
+    WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.descriptionLabel.text = session.descriptionText;
+    NSArray *focuses = [[session valueForKeyPath:@"focuses.name"] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES]]];
+    self.focusLabel.text = [focuses componentsJoinedByString:@", "];
+    self.yearLabel.text = [session.year stringValue];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@ – %@", session.id, session.title];
     self.shelfImageView.image = nil;
     
     self.descriptionLabel.hidden = NO;
+    self.focusLabel.hidden = NO;
     self.yearLabel.hidden = NO;
     self.titleLabel.hidden = NO;
     self.shelfImageView.hidden = NO;
 
-    NSString *imageKey = [NSString stringWithFormat:@"%@-%@", [session[@"year"] stringValue], [session[@"id"] stringValue]];
-    NSURL *imageSourceURL = [NSURL URLWithString:session[@"images"][@"shelf"]];
+    NSString *imageKey = [NSString stringWithFormat:@"%@-%@", [session.year stringValue], [session.id stringValue]];
+    NSURL *imageSourceURL = [NSURL URLWithString:session.shelfImageURLString];
     if (imageSourceURL == nil) {
         self.shelfImageView.image = [UIImage imageNamed:@"MissingShelfImage"];
     } else {
@@ -66,8 +76,8 @@
         [self.imageDataSource retrieveImageWithKey:imageKey sourceURL:imageSourceURL completionQueue:nil completionHandler:^(NSString * _Nonnull key, UIImage * _Nullable image, NSError * _Nullable error) {
             __strong WWIMPSessionListingViewController *strongSelf = weakSelf;
             if (strongSelf != nil && [strongSelf.focusedIndexPath isEqual:indexPath]) {
-                NSDictionary *session = strongSelf.sessions[indexPath.row];
-                NSString *currentImageKey = [NSString stringWithFormat:@"%@-%@", [session[@"year"] stringValue], [session[@"id"] stringValue]];
+                WWIMPSession *session = [strongSelf.fetchedResultsController objectAtIndexPath:indexPath];
+                NSString *currentImageKey = [NSString stringWithFormat:@"%@-%@", [session.year stringValue], [session.id stringValue]];
                 if ([currentImageKey isEqualToString:key]) {
                     strongSelf.shelfImageView.image = image;
                     [strongSelf.imageLoadingActivityIndicatorView stopAnimating];
@@ -85,9 +95,9 @@
     // Pass the selected object to the new view controller.
     UITableViewCell *selectedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
-    NSDictionary *session = self.sessions[indexPath.row];
+    WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
     AVPlayerViewController *viewController = [segue destinationViewController];
-    viewController.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:session[@"url"]]];
+    viewController.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:session.urlString]];
     [viewController.player play];
 }
 
@@ -95,22 +105,39 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [self.fetchedResultsController.sections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.sessions count];
+    NSArray<id<NSFetchedResultsSectionInfo>> *sections = self.fetchedResultsController.sections;
+    if ([sections count] > 0) {
+        id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
+
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *session = self.sessions[indexPath.row];
+    WWIMPSession *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SessionCell" forIndexPath:indexPath];
-    cell.textLabel.text = session[@"title"];
-    cell.detailTextLabel.text = [session[@"id"] stringValue];
+    cell.textLabel.text = session.title;
+    cell.detailTextLabel.text = [session.id stringValue];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSArray<id<NSFetchedResultsSectionInfo>> *sections = self.fetchedResultsController.sections;
+    if ([sections count] > 0) {
+        id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+        return [sectionInfo name];
+    }
+    
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate

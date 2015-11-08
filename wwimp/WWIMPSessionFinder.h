@@ -12,8 +12,6 @@
 
 @property (nonatomic, readonly, copy) NSArray* _Nullable tracks;
 @property (nonatomic, readonly, copy) NSArray* _Nullable allSessions;
-@property (nonatomic, readonly, copy) NSDictionary* _Nullable sessionsByTrack;
-@property (nonatomic, readonly, copy) NSDictionary* _Nullable sessionsByFocus;
 
 - (void)findSessionsWithURL:(NSURL *_Nonnull)sessionsURL completionQueue:(NSOperationQueue* _Nullable)queue completionHandler:(void(^_Nullable)(BOOL success, NSError* _Nullable error))completionHandler;
 

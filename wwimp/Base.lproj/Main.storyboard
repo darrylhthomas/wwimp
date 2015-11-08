@@ -49,30 +49,30 @@
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="Session Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ylr-fz-dQq">
-                                <rect key="frame" x="1126" y="153" width="218" height="46"/>
+                                <rect key="frame" x="1126" y="153" width="734" height="46"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUd-uG-B3l">
-                                <rect key="frame" x="1801" y="161" width="59" height="35"/>
+                                <rect key="frame" x="1803" y="628" width="57" height="35"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Po-bS-7o7">
-                                <rect key="frame" x="1126" y="660" width="734" height="35"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Focus" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQF-cX-7Cb">
+                                <rect key="frame" x="1126" y="628" width="78" height="35"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="SRD-Gd-1tC">
                                 <rect key="frame" x="60" y="153" width="1026" height="927"/>
                                 <animations/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SessionCell" textLabel="qjT-LQ-r8B" detailTextLabel="R8C-t2-9El" style="IBUITableViewCellStyleValue1" id="Bmh-FP-yWt">
                                         <rect key="frame" x="0.0" y="54" width="1026" height="66"/>
@@ -111,6 +111,13 @@
                                     <outlet property="delegate" destination="8l8-EE-9tl" id="Rfb-a8-T2M"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Po-bS-7o7">
+                                <rect key="frame" x="1126" y="671" width="734" height="35"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <constraints>
@@ -118,22 +125,27 @@
                             <constraint firstItem="yUd-uG-B3l" firstAttribute="trailing" secondItem="3Hm-QY-MzY" secondAttribute="trailing" id="Af8-wj-CZj"/>
                             <constraint firstItem="9M9-Re-Awh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7Po-bS-7o7" secondAttribute="bottom" id="Ekj-xY-t0n"/>
                             <constraint firstItem="ylr-fz-dQq" firstAttribute="top" secondItem="J70-42-g8a" secondAttribute="bottom" constant="8" symbolic="YES" id="GhW-pL-8nf"/>
-                            <constraint firstItem="yUd-uG-B3l" firstAttribute="baseline" secondItem="ylr-fz-dQq" secondAttribute="baseline" id="JcY-j4-Zpg"/>
-                            <constraint firstItem="7Po-bS-7o7" firstAttribute="top" secondItem="3Hm-QY-MzY" secondAttribute="bottom" constant="40" id="KA3-45-ooJ"/>
                             <constraint firstItem="7Po-bS-7o7" firstAttribute="leading" secondItem="3Hm-QY-MzY" secondAttribute="leading" id="MyL-F2-efp"/>
+                            <constraint firstItem="yUd-uG-B3l" firstAttribute="baseline" secondItem="IQF-cX-7Cb" secondAttribute="baseline" id="Nb2-Hb-mOF"/>
                             <constraint firstAttribute="bottomMargin" secondItem="SRD-Gd-1tC" secondAttribute="bottom" id="ODD-2R-QJk"/>
                             <constraint firstItem="ylr-fz-dQq" firstAttribute="leading" secondItem="3Hm-QY-MzY" secondAttribute="leading" id="Q5s-GZ-bHU"/>
+                            <constraint firstItem="yUd-uG-B3l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IQF-cX-7Cb" secondAttribute="trailing" constant="8" symbolic="YES" id="RC8-w2-QBm"/>
+                            <constraint firstItem="3Hm-QY-MzY" firstAttribute="trailing" secondItem="ylr-fz-dQq" secondAttribute="trailing" id="SEd-ts-iNo"/>
                             <constraint firstItem="3Hm-QY-MzY" firstAttribute="top" secondItem="ylr-fz-dQq" secondAttribute="bottom" constant="8" symbolic="YES" id="VMq-9R-zdb"/>
+                            <constraint firstItem="IQF-cX-7Cb" firstAttribute="leading" secondItem="3Hm-QY-MzY" secondAttribute="leading" id="VOZ-xZ-N2v"/>
+                            <constraint firstItem="IQF-cX-7Cb" firstAttribute="top" secondItem="3Hm-QY-MzY" secondAttribute="bottom" constant="8" symbolic="YES" id="aRd-il-QL6"/>
                             <constraint firstItem="7Po-bS-7o7" firstAttribute="trailing" secondItem="3Hm-QY-MzY" secondAttribute="trailing" id="bFZ-pt-rLt"/>
                             <constraint firstItem="3Hm-QY-MzY" firstAttribute="leading" secondItem="SRD-Gd-1tC" secondAttribute="trailing" constant="40" id="d4j-F6-4C6"/>
-                            <constraint firstItem="yUd-uG-B3l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ylr-fz-dQq" secondAttribute="trailing" constant="8" symbolic="YES" id="fzR-Kl-BDF"/>
                             <constraint firstItem="SRD-Gd-1tC" firstAttribute="top" secondItem="J70-42-g8a" secondAttribute="bottom" constant="8" symbolic="YES" id="iaS-8f-qxr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Hm-QY-MzY" secondAttribute="trailing" constant="40" id="jhp-DR-xq6"/>
+                            <constraint firstItem="7Po-bS-7o7" firstAttribute="top" secondItem="IQF-cX-7Cb" secondAttribute="bottom" constant="8" symbolic="YES" id="qMu-vL-oYX"/>
+                            <constraint firstItem="yUd-uG-B3l" firstAttribute="trailing" secondItem="3Hm-QY-MzY" secondAttribute="trailing" id="vGW-Wd-Jjd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rdc-D3-1YF"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="7Po-bS-7o7" id="WYw-O5-Nn3"/>
+                        <outlet property="focusLabel" destination="IQF-cX-7Cb" id="F2R-qn-OVz"/>
                         <outlet property="imageLoadingActivityIndicatorView" destination="cG4-Py-lle" id="fqa-lf-XEY"/>
                         <outlet property="preferredFocusedView" destination="SRD-Gd-1tC" id="4h2-MA-opg"/>
                         <outlet property="shelfImageView" destination="3Hm-QY-MzY" id="xMm-St-AaE"/>

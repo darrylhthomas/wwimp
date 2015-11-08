@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WWIMPSession.h"
+#import "WWIMPTrack.h"
+#import "WWIMPFocus.h"
 
 @interface WWIMPModelController : NSObject
+
+@property (nonatomic) NSManagedObjectContext *mainQueueManagedObjectContext;
+
+- (instancetype)initWithRemoteSessionsURL:(NSURL *)remoteSessionsURL documentURL:(NSURL *)localDocumentURL NS_DESIGNATED_INITIALIZER;
+
+- (void)fetchTracksWithCompletionHandler:(void(^)(NSArray *tracks, NSError *error))completionHandler;
+- (void)fetchSessionsGroupedByTrackWithCompletionHandler:(void(^)(NSDictionary *sessions, NSError *error))completionHandler;
 
 @end

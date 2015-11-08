@@ -11,14 +11,17 @@
 #import "WWIMPSessionListingNavigationController.h"
 #import "WWIMPMoreTableViewController.h"
 #import "WWIMPImageDataSource.h"
+#import "WWIMPModelController.h"
 
 #define SESSION_REQUEST_URL_STRING @""
 
 @interface WWIMPSessionTabBarController ()
-@property (nonatomic) WWIMPSessionFinder *sessionFinder;
+
 @property (nonatomic) WWIMPImageDataSource *imageDataSource;
 @property (nonatomic) BOOL needsURLAlert;
 @property (nonatomic) NSError *lastError;
+@property (nonatomic) WWIMPModelController *modelController;
+
 @end
 
 @implementation WWIMPSessionTabBarController
@@ -26,10 +29,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    // TODO: move all this elsewhere
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *storeURL = [[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject] URLByAppendingPathComponent:@"wwimp.db"];
+
+    NSString *sessionsURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"WWIMPSessionsURL"];
+    if (!sessionsURLString) {
+        sessionsURLString = SESSION_REQUEST_URL_STRING;
+    }
+    if ([sessionsURLString length] == 0) {
+        self.needsURLAlert = YES;
+        return;
+    }
     
-    self.sessionFinder = [[WWIMPSessionFinder alloc] init];
-    NSURL *cachesURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject];
+    NSURL *sessionsURL = [NSURL URLWithString:sessionsURLString];
+    
+    self.modelController = [[WWIMPModelController alloc] initWithRemoteSessionsURL:sessionsURL documentURL:storeURL];
+    NSURL *cachesURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject];
     self.imageDataSource = [[WWIMPImageDataSource alloc] initWithPersistentCacheURL:[cachesURL URLByAppendingPathComponent:@"images" isDirectory:YES]];
     
     [self reloadTabs];
@@ -58,40 +75,39 @@
 
 - (void)reloadTabs
 {
-    NSString *sessionsURLString = [[NSUserDefaults standardUserDefaults] stringForKey:@"WWIMPSessionsURL"];
-    if (!sessionsURLString) {
-        sessionsURLString = SESSION_REQUEST_URL_STRING;
-    }
-    if ([sessionsURLString length] == 0) {
-        self.needsURLAlert = YES;
-        return;
-    }
-    
-    NSURL *sessionsURL = [NSURL URLWithString:sessionsURLString];
     __weak WWIMPSessionTabBarController *weakSelf = self;
-    [self.sessionFinder findSessionsWithURL:sessionsURL completionQueue:nil completionHandler:^(BOOL success, NSError * _Nullable error) {
+    [self.modelController fetchTracksWithCompletionHandler:^(NSArray<WWIMPTrack*> *tracks, NSError *error) {
         __strong WWIMPSessionTabBarController *strongSelf = weakSelf;
         if (!strongSelf) {
             return;
         }
         
-        if (success) {
-            NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithCapacity:[strongSelf.sessionFinder.tracks count]];
-            for (NSString *track in strongSelf.sessionFinder.tracks) {
-                UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:track image:nil selectedImage:nil];
+        if (tracks) {
+            NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithCapacity:[tracks count]];
+            for (WWIMPTrack *track in tracks) {
+                UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:track.name image:nil selectedImage:nil];
                 
                 WWIMPSessionListingNavigationController *navController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"SessionListingNavigationController"];
                 navController.tabBarItem = item;
-                navController.listingViewController.title = track;
+                navController.listingViewController.title = track.name;
                 navController.listingViewController.imageDataSource = strongSelf.imageDataSource;
-                navController.listingViewController.sessions = strongSelf.sessionFinder.sessionsByTrack[track];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"track = %@", track];
+                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[WWIMPSession entityName]];
+                fetchRequest.predicate = predicate;
+                fetchRequest.sortDescriptors = @[
+                                                 [NSSortDescriptor sortDescriptorWithKey:@"year" ascending:NO],
+                                                 [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES],
+                                                 ];
+                NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:strongSelf.modelController.mainQueueManagedObjectContext sectionNameKeyPath:@"year" cacheName:nil];
+                navController.listingViewController.fetchedResultsController = fetchedResultsController;
+                navController.listingViewController.modelController = strongSelf.modelController;
                 [viewControllers addObject:navController];
             }
             
             if ([viewControllers count] > 7) {
                 NSRange moreRange = NSMakeRange(6, [viewControllers count] - 6);
                 NSArray *moreViewControllers = [viewControllers subarrayWithRange:moreRange];
-                WWIMPMoreTableViewController *moreViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreTableViewController"];
+                WWIMPMoreTableViewController *moreViewController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"MoreTableViewController"];
                 moreViewController.viewControllers = moreViewControllers;
                 UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
                 [viewControllers removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:moreRange]];
