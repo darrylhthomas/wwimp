@@ -15,7 +15,12 @@
 		440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405168F1BE842CF0041A29D /* WWIMPSessionTabBarController.m */; };
 		440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */; };
 		4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */; };
-		442CC10F1BEDD3F30040B63B /* models in Resources */ = {isa = PBXBuildFile; fileRef = 442CC10E1BEDD3F30040B63B /* models */; };
+		442CC1191BEEB0900040B63B /* _WWIMPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC1121BEEB0900040B63B /* _WWIMPSession.m */; };
+		442CC11A1BEEB0900040B63B /* _WWIMPTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC1141BEEB0900040B63B /* _WWIMPTrack.m */; };
+		442CC11B1BEEB0900040B63B /* WWIMPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC1161BEEB0900040B63B /* WWIMPSession.m */; };
+		442CC11C1BEEB0900040B63B /* WWIMPTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC1181BEEB0900040B63B /* WWIMPTrack.m */; };
+		442CC1211BEEDF630040B63B /* _WWIMPFocus.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC11E1BEEDF630040B63B /* _WWIMPFocus.m */; };
+		442CC1221BEEDF630040B63B /* WWIMPFocus.m in Sources */ = {isa = PBXBuildFile; fileRef = 442CC1201BEEDF630040B63B /* WWIMPFocus.m */; };
 		449A4C2A1BE8A9EC00C761C8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A4C291BE8A9EC00C761C8 /* AVKit.framework */; };
 		449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */; };
 		449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A4C301BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m */; };
@@ -40,7 +45,18 @@
 		440516981BE862820041A29D /* WWIMPSessionListingNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingNavigationController.m; sourceTree = "<group>"; };
 		4405169A1BE863D90041A29D /* WWIMPSessionListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSessionListingViewController.h; sourceTree = "<group>"; };
 		4405169B1BE863D90041A29D /* WWIMPSessionListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSessionListingViewController.m; sourceTree = "<group>"; };
-		442CC10E1BEDD3F30040B63B /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
+		442CC1111BEEB0900040B63B /* _WWIMPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WWIMPSession.h; sourceTree = "<group>"; };
+		442CC1121BEEB0900040B63B /* _WWIMPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WWIMPSession.m; sourceTree = "<group>"; };
+		442CC1131BEEB0900040B63B /* _WWIMPTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WWIMPTrack.h; sourceTree = "<group>"; };
+		442CC1141BEEB0900040B63B /* _WWIMPTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WWIMPTrack.m; sourceTree = "<group>"; };
+		442CC1151BEEB0900040B63B /* WWIMPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPSession.h; sourceTree = "<group>"; };
+		442CC1161BEEB0900040B63B /* WWIMPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPSession.m; sourceTree = "<group>"; };
+		442CC1171BEEB0900040B63B /* WWIMPTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPTrack.h; sourceTree = "<group>"; };
+		442CC1181BEEB0900040B63B /* WWIMPTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPTrack.m; sourceTree = "<group>"; };
+		442CC11D1BEEDF630040B63B /* _WWIMPFocus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _WWIMPFocus.h; sourceTree = "<group>"; };
+		442CC11E1BEEDF630040B63B /* _WWIMPFocus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _WWIMPFocus.m; sourceTree = "<group>"; };
+		442CC11F1BEEDF630040B63B /* WWIMPFocus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPFocus.h; sourceTree = "<group>"; };
+		442CC1201BEEDF630040B63B /* WWIMPFocus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPFocus.m; sourceTree = "<group>"; };
 		449A4C291BE8A9EC00C761C8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		449A4C2B1BE943AB00C761C8 /* WWIMPImageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWIMPImageDataSource.h; sourceTree = "<group>"; };
 		449A4C2C1BE943AB00C761C8 /* WWIMPImageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWIMPImageDataSource.m; sourceTree = "<group>"; };
@@ -86,10 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				449A4C2E1BE963BA00C761C8 /* Categories */,
-				442CC10E1BEDD3F30040B63B /* models */,
+				442CC1101BEEB0010040B63B /* Models */,
 				440516771BE8169E0041A29D /* AppDelegate.h */,
 				440516781BE8169E0041A29D /* AppDelegate.m */,
-				44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */,
 				44D822F01BEC86F800B6C34F /* WWIMPModelController.h */,
 				44D822F11BEC86F800B6C34F /* WWIMPModelController.m */,
 				4405168B1BE8172A0041A29D /* WWIMPSessionFinder.h */,
@@ -118,6 +133,27 @@
 				440516751BE8169E0041A29D /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		442CC1101BEEB0010040B63B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44D822ED1BEC801100B6C34F /* wwimp.xcdatamodeld */,
+				442CC1111BEEB0900040B63B /* _WWIMPSession.h */,
+				442CC1121BEEB0900040B63B /* _WWIMPSession.m */,
+				442CC1131BEEB0900040B63B /* _WWIMPTrack.h */,
+				442CC1141BEEB0900040B63B /* _WWIMPTrack.m */,
+				442CC1151BEEB0900040B63B /* WWIMPSession.h */,
+				442CC1161BEEB0900040B63B /* WWIMPSession.m */,
+				442CC1171BEEB0900040B63B /* WWIMPTrack.h */,
+				442CC1181BEEB0900040B63B /* WWIMPTrack.m */,
+				442CC11D1BEEDF630040B63B /* _WWIMPFocus.h */,
+				442CC11E1BEEDF630040B63B /* _WWIMPFocus.m */,
+				442CC11F1BEEDF630040B63B /* WWIMPFocus.h */,
+				442CC1201BEEDF630040B63B /* WWIMPFocus.m */,
+			);
+			name = Models;
+			path = models;
 			sourceTree = "<group>";
 		};
 		449A4C2E1BE963BA00C761C8 /* Categories */ = {
@@ -189,7 +225,6 @@
 			files = (
 				440516841BE8169F0041A29D /* Assets.xcassets in Resources */,
 				440516821BE8169F0041A29D /* Main.storyboard in Resources */,
-				442CC10F1BEDD3F30040B63B /* models in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,14 +238,20 @@
 				449A4C311BE9643400C761C8 /* NSMutableDictionary+MutableArrayNodes.m in Sources */,
 				440516791BE8169E0041A29D /* AppDelegate.m in Sources */,
 				440516901BE842CF0041A29D /* WWIMPSessionTabBarController.m in Sources */,
+				442CC11A1BEEB0900040B63B /* _WWIMPTrack.m in Sources */,
 				44ED15331BEB36CC0041BBA4 /* WWIMPMoreTableViewController.m in Sources */,
+				442CC1221BEEDF630040B63B /* WWIMPFocus.m in Sources */,
 				44D822EF1BEC801100B6C34F /* wwimp.xcdatamodeld in Sources */,
 				4405169C1BE863D90041A29D /* WWIMPSessionListingViewController.m in Sources */,
 				44D822F21BEC86F800B6C34F /* WWIMPModelController.m in Sources */,
 				4405168D1BE8172A0041A29D /* WWIMPSessionFinder.m in Sources */,
+				442CC11C1BEEB0900040B63B /* WWIMPTrack.m in Sources */,
 				440516761BE8169E0041A29D /* main.m in Sources */,
+				442CC1211BEEDF630040B63B /* _WWIMPFocus.m in Sources */,
+				442CC1191BEEB0900040B63B /* _WWIMPSession.m in Sources */,
 				440516991BE862820041A29D /* WWIMPSessionListingNavigationController.m in Sources */,
 				449A4C2D1BE943AB00C761C8 /* WWIMPImageDataSource.m in Sources */,
+				442CC11B1BEEB0900040B63B /* WWIMPSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +409,8 @@
 				44D822EE1BEC801100B6C34F /* wwimp.xcdatamodel */,
 			);
 			currentVersion = 44D822EE1BEC801100B6C34F /* wwimp.xcdatamodel */;
-			path = wwimp.xcdatamodeld;
+			name = wwimp.xcdatamodeld;
+			path = ../wwimp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

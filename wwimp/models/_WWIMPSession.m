@@ -13,6 +13,7 @@ const struct WWIMPSessionAttributes WWIMPSessionAttributes = {
 };
 
 const struct WWIMPSessionRelationships WWIMPSessionRelationships = {
+	.focuses = @"focuses",
 	.track = @"track",
 };
 
@@ -102,6 +103,17 @@ const struct WWIMPSessionRelationships WWIMPSessionRelationships = {
 
 - (void)setPrimitiveYearValue:(int32_t)value_ {
 	[self setPrimitiveYear:@(value_)];
+}
+
+@dynamic focuses;
+
+- (NSMutableSet*)focusesSet {
+	[self willAccessValueForKey:@"focuses"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"focuses"];
+
+	[self didAccessValueForKey:@"focuses"];
+	return result;
 }
 
 @dynamic track;

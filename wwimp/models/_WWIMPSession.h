@@ -13,9 +13,11 @@ extern const struct WWIMPSessionAttributes {
 } WWIMPSessionAttributes;
 
 extern const struct WWIMPSessionRelationships {
+	__unsafe_unretained NSString *focuses;
 	__unsafe_unretained NSString *track;
 } WWIMPSessionRelationships;
 
+@class WWIMPFocus;
 @class WWIMPTrack;
 
 @interface WWIMPSessionID : NSManagedObjectID {}
@@ -59,9 +61,21 @@ extern const struct WWIMPSessionRelationships {
 
 //- (BOOL)validateYear:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSSet *focuses;
+
+- (NSMutableSet*)focusesSet;
+
 @property (nonatomic, strong) WWIMPTrack *track;
 
 //- (BOOL)validateTrack:(id*)value_ error:(NSError**)error_;
+
+@end
+
+@interface _WWIMPSession (FocusesCoreDataGeneratedAccessors)
+- (void)addFocuses:(NSSet*)value_;
+- (void)removeFocuses:(NSSet*)value_;
+- (void)addFocusesObject:(WWIMPFocus*)value_;
+- (void)removeFocusesObject:(WWIMPFocus*)value_;
 
 @end
 
@@ -90,6 +104,9 @@ extern const struct WWIMPSessionRelationships {
 
 - (int32_t)primitiveYearValue;
 - (void)setPrimitiveYearValue:(int32_t)value_;
+
+- (NSMutableSet*)primitiveFocuses;
+- (void)setPrimitiveFocuses:(NSMutableSet*)value;
 
 - (WWIMPTrack*)primitiveTrack;
 - (void)setPrimitiveTrack:(WWIMPTrack*)value;

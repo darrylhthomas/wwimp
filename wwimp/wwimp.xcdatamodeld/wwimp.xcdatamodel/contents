@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="Focus" representedClassName="WWIMPFocus" syncable="YES">
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="focuses" inverseEntity="Session" syncable="YES"/>
+    </entity>
     <entity name="Session" representedClassName="WWIMPSession" syncable="YES">
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -7,15 +11,17 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="urlString" attributeType="String" syncable="YES"/>
         <attribute name="year" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <relationship name="focuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Focus" inverseName="sessions" inverseEntity="Focus" syncable="YES"/>
         <relationship name="track" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="sessions" inverseEntity="Track" syncable="YES"/>
     </entity>
     <entity name="Track" representedClassName="WWIMPTrack" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="order" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="track" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Session" positionX="-63" positionY="-18" width="128" height="150"/>
-        <element name="Track" positionX="-54" positionY="36" width="128" height="90"/>
+        <element name="Session" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="Track" positionX="-54" positionY="36" width="128" height="30"/>
+        <element name="Focus" positionX="-54" positionY="45" width="128" height="30"/>
     </elements>
 </model>
