@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.tableView.remembersLastFocusedIndexPath = YES;
     [self reloadTableViewIfNeeded];
 }
 
