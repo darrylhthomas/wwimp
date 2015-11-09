@@ -167,8 +167,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ViewControllerCell" textLabel="t0r-QG-hWH" style="IBUITableViewCellStyleDefault" id="K0l-qF-fZT">
-                                <rect key="frame" x="0.0" y="54" width="1920" height="66"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ViewControllerCell" textLabel="t0r-QG-hWH" style="IBUITableViewCellStyleDefault" id="K0l-qF-fZT">
+                                <rect key="frame" x="0.0" y="199" width="1920" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0l-qF-fZT" id="q7X-52-1PN">
                                     <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
@@ -193,11 +193,62 @@
                             <outlet property="delegate" destination="bCE-wd-Ucd" id="uX3-xh-v5S"/>
                         </connections>
                     </tableView>
-                    <simulatedTabBarMetrics key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" title="More…" id="NjQ-bk-IHs">
+                        <connections>
+                            <outlet property="rightBarButtonItem" destination="RsC-iI-EmT" id="8bE-A1-2al"/>
+                        </connections>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bK-f9-GOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="edit" id="RsC-iI-EmT">
+                    <connections>
+                        <segue destination="31z-4o-fak" kind="presentation" identifier="OrderTracks" id="PTf-mK-QUM"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="2177" y="-1193"/>
+        </scene>
+        <!--Order Tracks-->
+        <scene sceneID="q9e-8T-M6J">
+            <objects>
+                <tableViewController storyboardIdentifier="TrackOrderTableViewController" title="Order Tracks" id="31z-4o-fak" customClass="WWIMPTrackOrderTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" id="tDH-tK-5p8">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrackCell" textLabel="6di-qD-HCh" style="IBUITableViewCellStyleDefault" id="MHF-4w-DTq">
+                                <rect key="frame" x="0.0" y="199" width="1920" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MHF-4w-DTq" id="t7A-bD-IBx">
+                                    <rect key="frame" x="0.0" y="0.0" width="1904" height="66"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6di-qD-HCh">
+                                            <rect key="frame" x="20" y="0.0" width="1864" height="66"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="31z-4o-fak" id="UpE-iD-9Ij"/>
+                            <outlet property="delegate" destination="31z-4o-fak" id="UjI-Gh-Xmd"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vM1-a2-qcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4254" y="-1193"/>
         </scene>
         <!--Session Listing Navigation Controller-->
         <scene sceneID="Nnb-XM-wQh">

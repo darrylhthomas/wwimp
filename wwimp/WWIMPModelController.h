@@ -17,6 +17,7 @@
 
 - (instancetype)initWithRemoteSessionsURL:(NSURL *)remoteSessionsURL documentURL:(NSURL *)localDocumentURL NS_DESIGNATED_INITIALIZER;
 
-- (void)fetchTracksWithCompletionHandler:(void(^)(NSArray *tracks, NSError *error))completionHandler;
+- (void)fetchTracksWithCompletionHandler:(void(^)(NSArray<WWIMPTrack*> *tracks, NSError *error))completionHandler;
+- (void)reorderTracks:(NSArray<WWIMPTrack*> *)tracks withCompletionHandler:(void(^)(BOOL success, NSError *error))completionHandler;
 
 @end

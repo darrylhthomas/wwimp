@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WWIMPTrackOrderTableViewController.h"
 
-@interface WWIMPMoreTableViewController : UITableViewController
+@protocol WWIMPMoreTableViewControllerDelegate;
+
+@interface WWIMPMoreTableViewController : UITableViewController<WWIMPTrackOrderTableViewControllerDelegate>
 
 @property (nonatomic, copy) NSArray *viewControllers;
+@property (nonatomic, copy) NSArray *allTracks;
+@property (nonatomic, weak) IBOutlet id<WWIMPMoreTableViewControllerDelegate> delegate;
+
+@end
+
+@protocol WWIMPMoreTableViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)moreTableViewController:(WWIMPMoreTableViewController *)controller didReorderTracks:(NSArray<WWIMPTrack *> *)tracks;
 
 @end

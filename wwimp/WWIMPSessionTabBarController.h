@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WWIMPMoreTableViewController.h"
 
-@interface WWIMPSessionTabBarController : UITabBarController
+@interface WWIMPSessionTabBarController : UITabBarController<WWIMPMoreTableViewControllerDelegate>
 
 @end

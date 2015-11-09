@@ -86,11 +86,29 @@
         [context performBlock:^{
 
             NSMutableDictionary *tracksByName = [[NSMutableDictionary alloc] initWithCapacity:[tracks count]];
+            NSMutableArray<WWIMPTrack*> *orderedTracks = [[NSMutableArray alloc] initWithCapacity:[tracks count]];
+            NSMutableArray<WWIMPTrack*> *unorderedTracks = [[NSMutableArray alloc] initWithCapacity:[tracks count]];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [tracks enumerateObjectsUsingBlock:^(NSString *trackName, NSUInteger idx, BOOL * _Nonnull stop) {
                 WWIMPTrack *track = [WWIMPTrack insertInManagedObjectContext:context];
                 track.name = trackName;
-                track.order = @(idx);
+                
+                NSNumber *defaultsOrder = [defaults objectForKey:track.orderUserDefaultsKey];
+                if (defaultsOrder) {
+                    track.order = defaultsOrder;
+                    [orderedTracks addObject:track];
+                } else {
+                    [unorderedTracks addObject:track];
+                }
+
                 tracksByName[trackName] = track;
+            }];
+            [orderedTracks sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]]];
+            [orderedTracks addObjectsFromArray:unorderedTracks];
+            NSMutableDictionary<NSString*, id> *orders = [[NSMutableDictionary alloc] initWithCapacity:[orderedTracks count]];
+            [orderedTracks enumerateObjectsUsingBlock:^(WWIMPTrack * _Nonnull track, NSUInteger idx, BOOL * _Nonnull stop) {
+                track.order = @(idx);
+                orders[track.orderUserDefaultsKey] = track.order;
             }];
             
             NSMutableDictionary *focusesByName = [[NSMutableDictionary alloc] init];
@@ -118,6 +136,7 @@
             
             NSError *saveError = nil;
             if ([context save:&saveError]) {
+                [defaults setValuesForKeysWithDictionary:orders];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.needsImport = NO;
                     NSArray *completionBlocks = self.importCompletionBlocks;
@@ -127,13 +146,15 @@
                     }
                 });
             } else {
+                // TODO: need a way of indicating that the completions won't be executed due to a failure
                 NSLog(@"Error while saving MOC: %@", [saveError localizedDescription]);
+                [context reset];
             }
         }];
     }];
 }
 
-- (void)fetchTracksWithCompletionHandler:(void (^)(NSArray *, NSError *))completionHandler
+- (void)fetchTracksWithCompletionHandler:(void (^)(NSArray<WWIMPTrack*> *, NSError *))completionHandler
 {
     [self performImportIfNeededFollowedByBlock:^{
         [self.backgroundManagedObjectContext performBlock:^{
@@ -159,6 +180,59 @@
                 });
             }
             
+        }];
+    }];
+}
+
+- (void)reorderTracks:(NSArray<WWIMPTrack *> *)tracks withCompletionHandler:(void (^)(BOOL, NSError *))completionHandler
+{
+    [self.mainQueueManagedObjectContext performBlock:^{
+        NSMutableDictionary<NSManagedObjectID*, NSNumber*> *orderIndexesByTrackMOID = [[NSMutableDictionary alloc] initWithCapacity:[tracks count]];
+        [tracks enumerateObjectsUsingBlock:^(WWIMPTrack * _Nonnull track, NSUInteger idx, BOOL * _Nonnull stop) {
+            orderIndexesByTrackMOID[track.objectID] = @(idx);
+        }];
+        [self.backgroundManagedObjectContext performBlock:^{
+            NSError *backgroundError = nil;
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:[WWIMPTrack entityName]];
+            request.resultType = NSManagedObjectResultType;
+            request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]];
+            NSArray<WWIMPTrack*> *allTracks = [self.backgroundManagedObjectContext executeFetchRequest:request error:&backgroundError];
+            BOOL success = (allTracks != nil);
+            if (success) {
+                NSMutableArray<WWIMPTrack*> *unorderedTracks = [[NSMutableArray alloc] initWithCapacity:[allTracks count]];
+                NSUInteger maxOrderIndex = 0;
+                for (WWIMPTrack *track in allTracks) {
+                    NSNumber *order = orderIndexesByTrackMOID[track.objectID];
+                    if (order) {
+                        track.order = order;
+                        NSUInteger orderValue = [order unsignedIntegerValue];
+                        if (orderValue > maxOrderIndex) {
+                            maxOrderIndex = orderValue;
+                        }
+                    } else {
+                        [unorderedTracks addObject:track];
+                    }
+                }
+                NSUInteger unorderedIndexOffset = maxOrderIndex + 1;
+                [unorderedTracks enumerateObjectsUsingBlock:^(WWIMPTrack * _Nonnull track, NSUInteger idx, BOOL * _Nonnull stop) {
+                    track.order = @(unorderedIndexOffset + idx);
+                }];
+                
+                backgroundError = nil;
+                success = [self.backgroundManagedObjectContext save:&backgroundError];
+                if (success) {
+                    NSMutableDictionary<NSString*, id> *orders = [[NSMutableDictionary alloc] initWithCapacity:[tracks count]];
+                    for (WWIMPTrack *track in allTracks) {
+                        orders[track.orderUserDefaultsKey] = track.order;
+                    }
+                    [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:orders];
+                } else {
+                    [self.backgroundManagedObjectContext reset];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(success, backgroundError);
+            });
         }];
     }];
 }

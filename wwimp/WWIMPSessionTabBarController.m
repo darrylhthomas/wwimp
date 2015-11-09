@@ -9,7 +9,6 @@
 #import "WWIMPSessionTabBarController.h"
 #import "WWIMPSessionFinder.h"
 #import "WWIMPSessionListingNavigationController.h"
-#import "WWIMPMoreTableViewController.h"
 #import "WWIMPImageDataSource.h"
 #import "WWIMPModelController.h"
 
@@ -21,10 +20,13 @@
 @property (nonatomic) BOOL needsURLAlert;
 @property (nonatomic) NSError *lastError;
 @property (nonatomic) WWIMPModelController *modelController;
+@property (nonatomic, copy) NSArray *tracks;
+@property (nonatomic, readonly) NSMutableDictionary *sessionNavigationControllersByTrackName;
 
 @end
 
 @implementation WWIMPSessionTabBarController
+@synthesize sessionNavigationControllersByTrackName=_sessionNavigationControllersByTrackName;
 
 - (void)viewDidLoad
 {
@@ -86,39 +88,9 @@
         }
         
         if (tracks) {
-            NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithCapacity:[tracks count]];
-            for (WWIMPTrack *track in tracks) {
-                UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:track.name image:nil selectedImage:nil];
-                
-                WWIMPSessionListingNavigationController *navController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"SessionListingNavigationController"];
-                navController.tabBarItem = item;
-                navController.listingViewController.title = track.name;
-                navController.listingViewController.imageDataSource = strongSelf.imageDataSource;
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"track = %@", track];
-                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[WWIMPSession entityName]];
-                fetchRequest.predicate = predicate;
-                fetchRequest.sortDescriptors = @[
-                                                 [NSSortDescriptor sortDescriptorWithKey:@"year" ascending:NO],
-                                                 [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES],
-                                                 ];
-                NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:strongSelf.modelController.mainQueueManagedObjectContext sectionNameKeyPath:@"year" cacheName:nil];
-                navController.listingViewController.fetchedResultsController = fetchedResultsController;
-                navController.listingViewController.modelController = strongSelf.modelController;
-                [viewControllers addObject:navController];
-            }
-            
-            if ([viewControllers count] > 7) {
-                NSRange moreRange = NSMakeRange(6, [viewControllers count] - 6);
-                NSArray *moreViewControllers = [viewControllers subarrayWithRange:moreRange];
-                WWIMPMoreTableViewController *moreViewController = [strongSelf.storyboard instantiateViewControllerWithIdentifier:@"MoreTableViewController"];
-                moreViewController.viewControllers = moreViewControllers;
-                UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
-                [viewControllers removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:moreRange]];
-                [viewControllers addObject:moreNavigationController];
-            }
-            
-            strongSelf.viewControllers = viewControllers;
+            [strongSelf updateTabsWithTracks:tracks];
         } else {
+            strongSelf.tracks = nil;
             strongSelf.viewControllers = nil;
             if (strongSelf.view.window) {
                 [strongSelf presentAlertForError:error];
@@ -127,6 +99,66 @@
             }
         }
     }];
+}
+
+- (void)updateTabsWithTracks:(NSArray<WWIMPTrack*> *)tracks
+{
+    NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithCapacity:[tracks count]];
+    for (WWIMPTrack *track in tracks) {
+        WWIMPSessionListingNavigationController *navController = [self sessionNavigationControllerForTrack:track];
+        [viewControllers addObject:navController];
+    }
+    
+    if ([viewControllers count] > 7) {
+        NSRange moreRange = NSMakeRange(6, [viewControllers count] - 6);
+        NSArray *moreViewControllers = [viewControllers subarrayWithRange:moreRange];
+        // TODO: refactor this for reuse
+        WWIMPMoreTableViewController *moreViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreTableViewController"];
+        moreViewController.viewControllers = moreViewControllers;
+        moreViewController.allTracks = tracks;
+        moreViewController.delegate = self;
+        UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
+        [viewControllers removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:moreRange]];
+        [viewControllers addObject:moreNavigationController];
+    }
+    
+    self.tracks = tracks;
+    self.viewControllers = viewControllers;
+}
+
+- (NSMutableDictionary *)sessionNavigationControllersByTrackName
+{
+    if (!_sessionNavigationControllersByTrackName) {
+        _sessionNavigationControllersByTrackName = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _sessionNavigationControllersByTrackName;
+}
+
+- (WWIMPSessionListingNavigationController *)sessionNavigationControllerForTrack:(WWIMPTrack *)track
+{
+    WWIMPSessionListingNavigationController *navController = self.sessionNavigationControllersByTrackName[track.name];
+    if (navController == nil) {
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:track.name image:nil selectedImage:nil];
+        
+        navController = [self.storyboard instantiateViewControllerWithIdentifier:@"SessionListingNavigationController"];
+        navController.tabBarItem = item;
+        navController.listingViewController.title = track.name;
+        navController.listingViewController.imageDataSource = self.imageDataSource;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"track = %@", track];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[WWIMPSession entityName]];
+        fetchRequest.predicate = predicate;
+        fetchRequest.sortDescriptors = @[
+                                         [NSSortDescriptor sortDescriptorWithKey:@"year" ascending:NO],
+                                         [NSSortDescriptor sortDescriptorWithKey:@"id" ascending:YES],
+                                         ];
+        NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.modelController.mainQueueManagedObjectContext sectionNameKeyPath:@"year" cacheName:nil];
+        navController.listingViewController.fetchedResultsController = fetchedResultsController;
+        navController.listingViewController.modelController = self.modelController;
+        self.sessionNavigationControllersByTrackName[track.name] = navController;
+    }
+    
+    return navController;
 }
 
 - (void)presentAlertForError:(NSError *)error
@@ -143,6 +175,25 @@
     [alertController addAction:retryAction];
     [alertController addAction:quitAction];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - WWIMPMoreTableViewControllerDelegate
+
+- (void)moreTableViewController:(WWIMPMoreTableViewController *)controller didReorderTracks:(NSArray<WWIMPTrack *> *)tracks
+{
+    [self.modelController reorderTracks:tracks withCompletionHandler:^(BOOL success, NSError *error) {
+        if (success) {
+            [self updateTabsWithTracks:tracks];
+        } else {
+            NSString *title = NSLocalizedString(@"Error Reordering Tracks", nil);
+            NSString *message = [error localizedDescription];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];    
 }
 
 @end

@@ -22,6 +22,15 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"OrderTracks"]) {
+        WWIMPTrackOrderTableViewController *viewController = segue.destinationViewController;
+        viewController.tracks = self.allTracks;
+        viewController.delegate = self;
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -47,6 +56,15 @@
 {
     UIViewController *viewController = self.viewControllers[indexPath.row];
     [self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - WWIMPTrackOrderTableViewControllerDelegate
+
+-(void)trackOrderTableViewController:(WWIMPTrackOrderTableViewController *)controller didReorderTracks:(NSArray<WWIMPTrack *> *)tracks
+{
+    if ([self.delegate respondsToSelector:@selector(moreTableViewController:didReorderTracks:)]) {
+        [self.delegate moreTableViewController:self didReorderTracks:tracks];
+    }
 }
 
 @end

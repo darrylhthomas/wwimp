@@ -8,6 +8,10 @@
 
 @implementation WWIMPTrack
 
-// Custom logic goes here.
+- (NSString *)orderUserDefaultsKey
+{
+    NSAssert(self.name, @"-orderUserDefaultsKey called while name is nil");
+    return [@"track_order:" stringByAppendingString:self.name];
+}
 
 @end
